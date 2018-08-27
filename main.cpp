@@ -134,7 +134,7 @@ void copy()
  }
  ft<<"\n";
 
- cout<<"File Copied Successfully..!!";
+ cout<<"Main database has been updated..!!";
  fs.close();
  ft.close();
  ofstream ofs;
