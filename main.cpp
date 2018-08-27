@@ -3,7 +3,7 @@
 int main()
 {
 
-     cout<<"                            BLOCKCHAIN ALGORITHM IN C++ TO DEVELOPE A UNHACKABLE LEDGER  "<<endl<<endl;
+     cout<<"                            BLOCKCHAIN ALGORITHM IN C++ "<<endl<<endl;
     cout<<"THIS PROGRAM CONTAINS A COPYWRITE HEADER AND CPP FILE SHA256 PROVIDED BY zedwood.com BASED ON Olivier Gay's version"<<endl<<endl;
     cout<<"DEFAULT DIFFICULTY LEVEL HAS BEEN SET TO 4 "<<endl<<endl;
     cout<<"                           THIS PROGRAM IS DEVELOPED BY ASHISH PANDEY "<<endl<<endl;
