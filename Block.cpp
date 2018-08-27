@@ -220,7 +220,7 @@ fp.close();
      {
         ofstream fp2;
         ifstream fp1;
-     fp1.open("database.txt",ios::in);
+     fp1.open("Database.dat",ios::in);
      fp2.open("store.txt",ios::out);
       while(getline(fp1,input))
          {
