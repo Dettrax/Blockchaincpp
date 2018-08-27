@@ -3,12 +3,13 @@
 int main()
 {
 
-     cout<<"              BLOCKCHAIN ALGORITHM IN C++ "<<endl<<endl;
+     cout<<"                            BLOCKCHAIN ALGORITHM IN C++ TO DEVELOPE A UNHACKABLE LEDGER  "<<endl<<endl;
     cout<<"THIS PROGRAM CONTAINS A COPYWRITE HEADER AND CPP FILE SHA256 PROVIDED BY zedwood.com BASED ON Olivier Gay's version"<<endl<<endl;
     cout<<"DEFAULT DIFFICULTY LEVEL HAS BEEN SET TO 4 "<<endl<<endl;
     cout<<"                           THIS PROGRAM IS DEVELOPED BY ASHISH PANDEY "<<endl<<endl;
     cout<<"                           JONDHALE COLLEGE COMPUTER ENGINEERING\n\n";
 
+    void copy();
     int print();
     Blockchain bChain = Blockchain();
 
@@ -27,6 +28,8 @@ int main()
     while(getline(fp,input))
         line_count++;
        if(choice==1){
+        if(line_count<10)
+         {
         string buffer;
          string transaction_amt,from="",to="";
         getline(cin,buffer);
@@ -41,15 +44,16 @@ int main()
        cout<<line_count<<endl;
          string transaction = "_"+from +"_"+ to +"_"+transaction_amt;
          cout<<transaction<<endl;
-         if(line_count<10)
-         {
+
             cout << "Mining block "<<line_count+1<<" ...." << endl;
             bChain.AddBlock(Block(line_count+1,transaction,0,0));
         }
         else
            {
-               cout<<"Make another database max 9 entry allowed make another database to add more"<<endl;
-               exit(0);
+               //cout<<"Make another database max 9 entry allowed make another database to add more"<<endl;
+               //   exit(0);
+               copy();
+
            }
        }
     else if(choice==2)
@@ -113,4 +117,27 @@ int print()
     cout<<"\n Enter choice\n1.Mine block\n2.retrieve info  ";
     cin>>ch;
     return ch;
+}
+void copy()
+{
+    ifstream fs;
+ ofstream ft;
+ char ch;
+ string fname1 = "database.txt", fname2 = "Database.dat";
+
+ fs.open(fname1,ios::in);
+ ft.open(fname2,ios::app);
+ while(fs.eof()==0)
+ {
+  fs>>ch;
+  ft<<ch;
+ }
+ ft<<"\n";
+
+ cout<<"File Copied Successfully..!!";
+ fs.close();
+ ft.close();
+ ofstream ofs;
+ofs.open("database.txt", std::ofstream::out | std::ofstream::trunc);
+ofs.close();
 }
