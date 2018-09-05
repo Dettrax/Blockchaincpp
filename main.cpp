@@ -51,7 +51,7 @@ int main()
         }
         else
            {
-               cout<<"Make another database max 4 entry allowed make another database to add more"<<endl;
+               cout<<"Make another database max 9 entry allowed make another database to add more"<<endl;
                exit(0);
            }
        }
