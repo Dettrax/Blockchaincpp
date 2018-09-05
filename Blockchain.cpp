@@ -10,18 +10,24 @@ Blockchain::Blockchain()
 
 void Blockchain::AddBlock(Block bNew)
 {
-     ifstream fp;
+
+
+    ifstream fp;
+
+
+
     fp.open("database.txt",ios::in);
     string input;
     char temp_str[64];
     while(getline(fp,input))
     {
         int i,j=0;
-    for(i=3+65,j=0;i<3+65+64;i++,j++)
+    for(i=2+65,j=0;i<2+65+64;i++,j++)
         temp_str[j]=input[i];
     temp_str[j]='\0';
     }
     string str(temp_str);
+   // cout<<str;
     string  st = _GetLastBlock().sHash;
     if(bNew._nIndex==1)
     bNew.sPrevHash = st;
