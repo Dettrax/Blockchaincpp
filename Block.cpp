@@ -1,4 +1,3 @@
-
 #include<math.h>
 #include<string.h>
 #include<fstream>
@@ -21,11 +20,8 @@ Block::Block(uint32_t nIndexIn, const string &sDataIn,int file_check,int store_f
     str_chcurrhash = _CheckCalculateHash();
     sHash = _CalculateHash();
 }
-
 void Block::MineBlock(uint32_t nDifficulty)
 {
-
-
     ifstream fp;
     string input;
     fp.open("database.txt",ios::in);
@@ -55,17 +51,10 @@ void Block::MineBlock(uint32_t nDifficulty)
     cout<<"\n";
     while(getline(fp3,input))
     {
-       /* cout<<"\n";
-        for(j=0;j<64;j++)
-            cout<<temp_hashcheck[j];
-        cout<<"\n";
-        for(j=0,i=3;i<3+64;i++,j++)
-            cout<<input[i];*/
-        for(j=0,i=3;i<3+64;i++,j++)
+      for(j=0,i=3;i<3+64;i++,j++)
       {
           if(input[i] != temp_hashcheck[j])
         {
-
             cout<<"invallid by prev "<<endl;
             exit(1);
         }
@@ -74,18 +63,14 @@ void Block::MineBlock(uint32_t nDifficulty)
             temp_hashcheck[j] = input[i];
     }
     fp3.close();
-
- // hash validity
-
-// ifstream fp;
- fp.open("database.txt",ios::in);
+ // hash validity for database.txt
+fp.open("database.txt",ios::in);
  int line_count =0;
  while(getline(fp,input))
     line_count++;
  fp.close();
 char ch_index[2], ch_previoushash[64],ch_currenthash[64],ch_time[10],ch_nonce[10],ch_data[40];
 fp.open("database.txt",ios::in);
-
 while(getline(fp,input))
 {
     ch_index[0] = input[0];
@@ -113,11 +98,7 @@ while(getline(fp,input))
         ch_data[j] = input[i];
     ch_data[j]  = '\0';
     temp_chData.assign(ch_data);
-
-
-  /*cout<<"\n"<<input<<endl;
-   cout<<str_chIndex<<str_chprevhash<<temp_chTime<<temp_chNonce<<temp_chData<<endl;
-    */cout<<endl;
+    cout<<endl;
     string check_block = _CheckCalculateHash();
     char cstr[nDifficulty + 1];
     for (uint32_t i = 0; i < nDifficulty; ++i)
@@ -134,29 +115,20 @@ while(getline(fp,input))
             exit(2);
         }
     }
-
-
-
 }
 fp.close();
-
-
-
     char cstr[nDifficulty + 1];
     for (uint32_t i = 0; i < nDifficulty; ++i)
     {
         cstr[i] = '0';
     }
     cstr[nDifficulty] = '\0';
-
     string str(cstr);
-
     while (sHash.substr(0, nDifficulty) != str)
     {
         _nNonce++;
         sHash = _CalculateHash();
     }
-
     //For 1st entry
     if(_nIndex==1&&file_check==0)
      {
@@ -164,8 +136,6 @@ fp.close();
      fp1.open("database.txt",ios::out);
      fp1<<_nIndex<<" "<<nDifficulty<<sPrevHash<<sHash<< _tTime<< _nNonce<<" "<< _sData<<"\n";
      fp1.close();
-     //cout<<sPrevHash<<endl;
-     //cout<<sHash<<endl;
      }
      else if(_nIndex>1&&file_check==0)
      {
@@ -175,9 +145,7 @@ fp.close();
      fp1<<_nIndex<<" "<<nDifficulty<<sPrevHash<<sHash<< _tTime<< _nNonce<<" "<< _sData<<"\n";
      fp1.close();
    }
-
-
-     if(file_check==1 && _nIndex>=1 && store_file==0)
+     if(file_check==1 && _nIndex>=1 && store_file==1)
      {
          ifstream fp1;
          fp1.open("database.txt",ios::in);
@@ -192,56 +160,43 @@ fp.close();
          }
          fp.close();
      }
-     else if(file_check==1 && _nIndex>=1 && store_file==1)
+     if(file_check==1 && _nIndex>=1 && store_file==1)
      {
         ofstream fp2;
         ifstream fp1;
-     fp1.open("database.txt",ios::in);
+     fp1.open("Database.dat",ios::in);
      fp2.open("store.txt",ios::out);
       while(getline(fp1,input))
          {
              int y;
-             char store_flag[50];
-             //cout<<"Block "<<input[0]<<" Data is :";
+             char store_flag[90];
              int k;
              for(k=0;input[k]!='_';k++);
              for(y=0;input[k]!='\0';k++,y++)
                 store_flag[y]=input[k];
             store_flag[y] ='\0';
             string str_store_flag(store_flag);
+            if(input[0] == '1' || input[0] == '2' || input[0] == '3' || input[0] == '4')
             fp2<<input[0]<<"  "<<str_store_flag<<endl;
-
          }
-
      fp2.close();
      fp1.close();
      }
-
     cout << "\nBlock mined: " << sHash << endl;
-    //cout<<_nIndex<<" " <<nDifficulty<<" "<< sPrevHash<<" " <<sHash<<" "<< _tTime<<" " << _nNonce<<" " << _sData<<"\n";
 
 }
-
 inline string Block::_CheckCalculateHash() const
 {
-
     string ss1;
     ss1 = str_chIndex+ str_chprevhash + temp_chTime + temp_chData +temp_chNonce;
     return sha256(ss1);
-
 }
 inline string Block::_CalculateHash() const
 {
-    //stringstream ss;
     string timep,indexp,noncep,res;
     timep = to_string(_tTime);
     indexp = to_string(_nIndex);
     noncep = to_string(_nNonce);
-    //ss << _nIndex << sPrevHash << timep << _sData << _nNonce;
     res = indexp + sPrevHash + timep + _sData + noncep;
-   // cout<<res<<"\n\n";
-    //cout<<res.length()<<endl;
-
-
             return sha256(res);
 }
